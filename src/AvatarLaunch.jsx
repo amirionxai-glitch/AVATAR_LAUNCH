@@ -185,13 +185,13 @@ const AvatarLaunch = () => {
 
                     {/* Desktop Links */}
                     <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                        {['The Program', 'Features', 'Community'].map((item) => (
+                        {['The Program', 'Features'].map((item) => (
                             <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="hover:text-blue-400 transition-colors relative group">
                                 {item}
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                             </a>
                         ))}
-                        <button className="bg-white text-slate-950 px-5 py-2 rounded-full font-semibold hover:bg-blue-50 transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]">
+                        <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white text-slate-950 px-5 py-2 rounded-full font-semibold hover:bg-blue-50 transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]">
                             Get Access
                         </button>
                     </div>
@@ -212,12 +212,12 @@ const AvatarLaunch = () => {
                             transition={{ duration: 0.2 }}
                             className="md:hidden absolute top-full left-0 w-full bg-slate-900/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-4 shadow-2xl"
                         >
-                            {['The Program', 'Features', 'Community'].map((item) => (
+                            {['The Program', 'Features'].map((item) => (
                                 <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-lg text-slate-300" onClick={() => setMobileMenuOpen(false)}>
                                     {item}
                                 </a>
                             ))}
-                            <button className="w-full bg-blue-600 py-3 rounded-lg font-bold mt-2 text-white">Get Access</button>
+                            <button onClick={() => { setMobileMenuOpen(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="w-full bg-blue-600 py-3 rounded-lg font-bold mt-2 text-white">Get Access</button>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -279,7 +279,10 @@ const AvatarLaunch = () => {
                         transition={{ delay: 0.8, duration: 0.8 }}
                         className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
-                        <button className="group w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-all shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] flex items-center justify-center gap-2 hover:scale-105 active:scale-95">
+                        <button
+                            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                            className="group w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-all shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+                        >
                             Launch Your Avatar <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                         <button className="group w-full sm:w-auto px-8 py-4 bg-slate-900 border border-slate-700 hover:border-slate-500 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-slate-800">
@@ -462,30 +465,161 @@ const AvatarLaunch = () => {
                 </div>
             </section>
 
-            {/* --- CTA / Footer Section --- */}
-            <section className="py-20 px-6 border-t border-white/5 bg-gradient-to-b from-slate-950 to-blue-950/20 relative overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl bg-blue-500/5 blur-[100px] pointer-events-none"></div>
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="container mx-auto max-w-4xl text-center relative z-10"
-                >
-                    <h2 className="text-4xl font-bold mb-6">Ready to Build the Future?</h2>
-                    <p className="text-slate-400 mb-10 max-w-xl mx-auto">
-                        Join thousands of creators who are defining the next era of social media influence.
-                        The tools are ready. The world is watching.
-                    </p>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="px-10 py-4 bg-white text-blue-900 rounded-full font-bold text-lg hover:bg-blue-50 transition-colors shadow-xl shadow-blue-900/20"
+            {/* --- Comparison Section --- */}
+            <section className="py-24 bg-slate-950 relative overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+                <div className="container mx-auto px-6 max-w-5xl relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="text-center mb-16"
                     >
-                        Join Avatar Launch
-                    </motion.button>
-                    <p className="mt-6 text-sm text-slate-500">Includes 7-day money-back guarantee.</p>
-                </motion.div>
+                        <span className="text-blue-400 font-bold tracking-wider text-sm uppercase mb-4 block">• The Strategic Advantage</span>
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                            Why Digital Twins Win <br />
+                            <span className="text-slate-500">Every Single Time</span>
+                        </h2>
+                        <p className="text-slate-400 max-w-2xl mx-auto">
+                            The gap between traditional creators and AI-native brands is widening.
+                            Choose which side of history you want to be on.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-2 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                        {/* Left - The Old Way */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2, duration: 0.6 }}
+                            className="p-10 bg-slate-900/80 backdrop-blur-sm"
+                        >
+                            <h3 className="text-xl font-bold text-white mb-2">Manual Content Creation</h3>
+                            <p className="text-slate-500 text-sm mb-8">The bottleneck is you.</p>
+                            <ul className="space-y-6">
+                                {[
+                                    "Limited by physical energy & burnout",
+                                    "Inconsistent posting schedule",
+                                    "Expensive gear & studio costs",
+                                    "Restricted to one location",
+                                    "Hours lost to retakes & editing"
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-slate-400">
+                                        <div className="mt-1 w-5 h-5 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                                            <X size={12} className="text-red-500" />
+                                        </div>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+
+                        {/* Right - The New Way */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4, duration: 0.6 }}
+                            className="p-10 bg-slate-900 relative"
+                        >
+                            <div className="absolute inset-0 bg-blue-600/5 pointer-events-none"></div>
+                            {/* Green accent line for 'success' feeling matching the reference, but keeping blue theme consistency */}
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-400"></div>
+
+                            <h3 className="text-xl font-bold text-white mb-2">The Avatar Ecosystem</h3>
+                            <p className="text-blue-400 text-sm mb-8">Scale infinitely. Zero burnout.</p>
+                            <ul className="space-y-6 relative z-10">
+                                {[
+                                    "24/7 Content Generation while you sleep",
+                                    "Perfect consistency & branding",
+                                    "Zero marginal cost per video",
+                                    "Omnipresent digital footprint",
+                                    "Focus on strategy, not filming"
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-white font-medium">
+                                        <div className="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                                            <CheckCircle size={12} className="text-green-400" />
+                                        </div>
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* --- CTA / Footer Section --- */}
+            <section id="pricing" className="py-24 px-6 relative overflow-hidden bg-slate-950">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+                <div className="container mx-auto max-w-4xl relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-12"
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">Unlock your potential.</h2>
+                        <p className="text-slate-400 text-lg">Straightforward pricing - start your journey today.</p>
+                    </motion.div>
+
+                    {/* Pricing Card */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 max-w-xl mx-auto shadow-2xl relative overflow-hidden group hover:border-blue-500/30 transition-colors duration-500"
+                    >
+                        {/* Badge */}
+                        <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-bl-xl uppercase tracking-wider shadow-lg">
+                            Exclusive
+                        </div>
+
+                        <div className="mb-8">
+                            <h3 className="text-2xl font-bold text-white mb-2">Full Access</h3>
+                            <div className="flex items-baseline gap-3">
+                                <span className="text-xl text-slate-500 line-through decoration-slate-500/50">$129/month</span>
+                                <span className="text-5xl font-bold text-white">$65</span>
+                                <span className="text-slate-500 font-medium">/ month</span>
+                            </div>
+                            <p className="text-slate-400 mt-4 leading-relaxed">
+                                Full access to the Avatar Launch curriculum, community, and all future updates.
+                            </p>
+                        </div>
+
+                        <div className="mb-8">
+                            <a href="https://whop.com/checkout/plan_Rg2fhMgehE8Ov" className="block w-full">
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-600/25"
+                                >
+                                    Get Access Now
+                                </motion.button>
+                            </a>
+                        </div>
+
+                        <div className="space-y-4 pt-8 border-t border-white/10">
+                            {[
+                                "Full access to the Avatar creation system",
+                                "Interactive, AI-powered lessons & workflows",
+                                "Consistent AI avatar creation & animation systems",
+                                "Short-form content, editing & voice workflows",
+                                "AI website builder + monetization setup",
+                                "Private Avatar Launch community access"
+                            ].map((feature, i) => (
+                                <div key={i} className="flex items-start gap-3 text-slate-300">
+                                    <CheckCircle size={18} className="text-blue-400 flex-shrink-0 mt-1" />
+                                    <span>{feature}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
             </section>
 
             {/* --- Simple Footer --- */}
