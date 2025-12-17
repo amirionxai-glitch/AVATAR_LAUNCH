@@ -149,7 +149,7 @@ const AvatarLaunch = () => {
                         repeat: Infinity,
                         ease: "easeInOut"
                     }}
-                    className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen"
+                    className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen will-change-transform"
                 />
                 <motion.div
                     animate={{
@@ -162,7 +162,7 @@ const AvatarLaunch = () => {
                         ease: "easeInOut",
                         delay: 1
                     }}
-                    className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] mix-blend-screen"
+                    className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] mix-blend-screen will-change-transform"
                 />
             </div>
 
@@ -379,21 +379,21 @@ const AvatarLaunch = () => {
                     <div className="grid md:grid-cols-3 gap-6">
                         {[
                             {
-                                quote: "I went from manually editing videos for 10 hours to generating a week's worth of content in 30 minutes. The workflow is a cheat code.",
+                                quote: "Make no mistake, there is a learning curve. But the 'Consistent Character' workflow is the only thing that actually worked for me. I generated 30 clips this weekend and they finally look like the same person.",
                                 author: "Alex R.",
                                 role: "Digital Artist",
                                 stars: 5,
                                 image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
                             },
                             {
-                                quote: "People literally don't believe my avatar is AI. The lip-sync tech taught in this program is lightyears ahead of anything on YouTube.",
+                                quote: "I wasted weeks watching YouTube tutorials on lip-syncing that never looked right. Switched to the v2 workflow from Module 3 and my retention rate on TikTok went from 15% to 60% overnight.",
                                 author: "Sarah K.",
                                 role: "Content Creator",
                                 stars: 5,
                                 image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
                             },
                             {
-                                quote: "The monetization module paid for the course in my first week. Brand deals for virtual influencers are just different.",
+                                quote: "Just closed my first UGC deal for $800. The client thinks I have a full studio setup lol. Once you get the lighting presets dialed in, this system basically prints money.",
                                 author: "Marcus T.",
                                 role: "Agency Owner",
                                 stars: 5,
