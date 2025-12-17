@@ -285,13 +285,17 @@ const AvatarLaunch = () => {
                         >
                             Launch Your Avatar <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <button className="group w-full sm:w-auto px-8 py-4 bg-slate-900 border border-slate-700 hover:border-slate-500 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-slate-800">
+                        <button
+                            onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
+                            className="group w-full sm:w-auto px-8 py-4 bg-slate-900 border border-slate-700 hover:border-slate-500 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-slate-800"
+                        >
                             <Play size={18} fill="currentColor" className="group-hover:text-blue-400 transition-colors" /> Watch Demo
                         </button>
                     </motion.div>
 
                     {/* Video Carousel */}
                     <motion.div
+                        id="demo"
                         initial={{ opacity: 0, y: 100 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1, duration: 1, ease: "easeOut" }}
@@ -353,6 +357,72 @@ const AvatarLaunch = () => {
                                 <p className="text-slate-400 leading-relaxed">
                                     {feature.desc}
                                 </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* --- Social Proof / Testimonials --- */}
+            <section className="py-24 bg-slate-950 relative overflow-hidden">
+                <div className="container mx-auto px-6 relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Creator Success Stories</h2>
+                        <p className="text-slate-400 max-w-2xl mx-auto">Join the new wave of digital creators who are redefining influence.</p>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {[
+                            {
+                                quote: "I went from manually editing videos for 10 hours to generating a week's worth of content in 30 minutes. The workflow is a cheat code.",
+                                author: "Alex R.",
+                                role: "Digital Artist",
+                                stars: 5,
+                                image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
+                            },
+                            {
+                                quote: "People literally don't believe my avatar is AI. The lip-sync tech taught in this program is lightyears ahead of anything on YouTube.",
+                                author: "Sarah K.",
+                                role: "Content Creator",
+                                stars: 5,
+                                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
+                            },
+                            {
+                                quote: "The monetization module paid for the course in my first week. Brand deals for virtual influencers are just different.",
+                                author: "Marcus T.",
+                                role: "Agency Owner",
+                                stars: 5,
+                                image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
+                            }
+                        ].map((testimonial, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="p-8 bg-slate-900/50 border border-white/5 rounded-2xl hover:bg-slate-900 hover:border-blue-500/30 transition-all duration-300"
+                            >
+                                <div className="flex gap-1 mb-4">
+                                    {[...Array(testimonial.stars)].map((_, s) => (
+                                        <Zap key={s} size={16} className="text-yellow-500 fill-yellow-500" />
+                                    ))}
+                                </div>
+                                <p className="text-slate-300 mb-6 leading-relaxed">"{testimonial.quote}"</p>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-800 border-2 border-slate-700">
+                                        <img src={testimonial.image} alt={testimonial.author} className="w-full h-full object-cover" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-white">{testimonial.author}</p>
+                                        <p className="text-slate-500 text-sm">{testimonial.role}</p>
+                                    </div>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
@@ -551,6 +621,7 @@ const AvatarLaunch = () => {
                 </div>
             </section>
 
+
             {/* --- CTA / Footer Section --- */}
             <section id="pricing" className="py-24 px-6 relative overflow-hidden bg-slate-950">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
@@ -622,10 +693,66 @@ const AvatarLaunch = () => {
                 </div>
             </section>
 
+            {/* --- FAQ Section --- */}
+            <section className="py-24 bg-slate-900/30 border-y border-white/5">
+                <div className="container mx-auto px-6 max-w-3xl">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-12"
+                    >
+                        <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                    </motion.div>
+
+                    <div className="space-y-4">
+                        {[
+                            {
+                                q: "Do I need a powerful computer to run the AI tools?",
+                                a: "Not necessarily. While a good GPU helps, we teach cloud-based workflows (using Google Colab and cloud rendering) that allow you to create high-end results on a standard laptop."
+                            },
+                            {
+                                q: "I have no coding experience. Is this for me?",
+                                a: "Absolutely. 90% of our tools are no-code or low-code. For the advanced sections, we provide copy-paste templates that just work."
+                            },
+                            {
+                                q: "How long until I have my first avatar ready?",
+                                a: "Most students launch their first 'Version 1.0' avatar within 48 hours of starting the program. Refinement continues from there."
+                            },
+                            {
+                                q: "Is this a subscription or one-time payment?",
+                                a: "You have two options: a monthly membership for ongoing updates and community, or a lifetime buyout. Choose what fits your budget."
+                            }
+                        ].map((faq, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="p-6 bg-slate-950 border border-white/5 rounded-xl hover:border-white/10 transition-colors"
+                            >
+                                <h3 className="font-bold text-white mb-2 flex items-center gap-2">
+                                    <span className="text-blue-500">Q.</span> {faq.q}
+                                </h3>
+                                <p className="text-slate-400 pl-6 border-l-2 border-slate-800 ml-1">
+                                    {faq.a}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* --- Simple Footer --- */}
             <footer className="py-8 bg-slate-950 border-t border-white/5 text-center text-slate-600 text-sm">
                 <p>&copy; {new Date().getFullYear()} Avatar Launch. All rights reserved.</p>
-                <p className="mt-2">Designed by AI. Built for Creators.</p>
+                <div className="flex justify-center gap-6 mt-4 text-xs font-medium text-slate-500">
+                    <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
+                    <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
+                    <a href="#" className="hover:text-blue-400 transition-colors">Support</a>
+                </div>
+                <p className="mt-4 opacity-50">Designed by AI. Built for Creators.</p>
             </footer>
         </div>
     );
