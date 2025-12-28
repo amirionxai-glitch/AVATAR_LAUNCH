@@ -201,13 +201,13 @@ const AvatarLaunch = () => {
                             }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-white text-slate-950 font-semibold hover:bg-blue-50 transition-colors rounded-full shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]"
+                            className="hidden md:block bg-white text-slate-950 font-semibold hover:bg-blue-50 transition-colors rounded-full shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]"
                         >
                             Get Access
                         </motion.button>
 
                         {/* Mobile Menu Toggle */}
-                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white z-50">
+                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white z-50 p-2">
                             {mobileMenuOpen ? <X /> : <Menu />}
                         </button>
                     </div>
@@ -267,7 +267,7 @@ const AvatarLaunch = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-                        className="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400"
+                        className="text-4xl md:text-7xl font-bold tracking-tight leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400"
                     >
                         THE FUTURE HAS A FACE <br />
                         <span className="text-blue-500 inline-block relative">
@@ -304,15 +304,15 @@ const AvatarLaunch = () => {
                     >
                         <button
                             onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="group w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-all shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+                            className="group w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-base md:text-lg transition-all shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
                         >
-                            Launch Your Avatar <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            Launch Your Avatar <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform md:w-5 md:h-5" />
                         </button>
                         <button
                             onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                            className="group w-full sm:w-auto px-8 py-4 bg-slate-900 border border-slate-700 hover:border-slate-500 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2 hover:bg-slate-800"
+                            className="group w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-slate-900 border border-slate-700 hover:border-slate-500 text-white rounded-xl font-semibold text-base md:text-lg transition-all flex items-center justify-center gap-2 hover:bg-slate-800"
                         >
-                            <Play size={18} fill="currentColor" className="group-hover:text-blue-400 transition-colors" /> Watch Demo
+                            <Play size={16} fill="currentColor" className="group-hover:text-blue-400 transition-colors md:w-[18px] md:h-[18px]" /> Watch Demo
                         </button>
                     </motion.div>
 
@@ -380,7 +380,7 @@ const AvatarLaunch = () => {
                                     className="relative group"
                                 >
                                     {/* Card */}
-                                    <div className="bg-slate-950 border border-white/10 rounded-2xl p-8 relative z-10 hover:border-blue-500/50 transition-all duration-300 h-full flex flex-col items-center text-center">
+                                    <div className="bg-slate-950 border border-white/10 rounded-2xl p-6 md:p-8 relative z-10 hover:border-blue-500/50 transition-all duration-300 h-full flex flex-col items-center text-center">
                                         <div className={`w-16 h-16 rounded-full bg-gradient-to-br from-${feature.color}-600 to-${feature.color}-800 flex items-center justify-center mb-6 shadow-lg shadow-${feature.color}-900/20 group-hover:scale-110 transition-transform duration-300 ring-4 ring-slate-950`}>
                                             {feature.icon}
                                         </div>
@@ -523,9 +523,9 @@ const AvatarLaunch = () => {
 
                             <button
                                 onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 group"
+                                className="w-full py-3.5 md:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-base md:text-lg transition-all shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 group"
                             >
-                                Access Now <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                                Access Now <ArrowRight className="group-hover:translate-x-1 transition-transform w-5 h-5" />
                             </button>
                         </motion.div>
                     </div>
@@ -561,7 +561,7 @@ const AvatarLaunch = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2, duration: 0.6 }}
-                            className="p-10 bg-slate-900/80 backdrop-blur-sm"
+                            className="p-6 md:p-10 bg-slate-900/80 backdrop-blur-sm"
                         >
                             <h3 className="text-xl font-bold text-white mb-2">Manual Content Creation</h3>
                             <p className="text-slate-500 text-sm mb-8">The bottleneck is you.</p>
@@ -589,7 +589,7 @@ const AvatarLaunch = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.4, duration: 0.6 }}
-                            className="p-10 bg-slate-900 relative"
+                            className="p-6 md:p-10 bg-slate-900 relative"
                         >
                             <div className="absolute inset-0 bg-blue-600/5 pointer-events-none"></div>
                             {/* Green accent line for 'success' feeling matching the reference, but keeping blue theme consistency */}
@@ -664,7 +664,7 @@ const AvatarLaunch = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-600/25"
+                                    className="w-full py-3.5 md:py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold text-base md:text-lg transition-all shadow-lg shadow-blue-600/25"
                                 >
                                     Get Access Now
                                 </motion.button>
