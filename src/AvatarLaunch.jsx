@@ -1,95 +1,38 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
     Cpu,
-    Users,
+
     Zap,
     ChevronRight,
+    ChevronDown,
     Play,
     CheckCircle,
     Menu,
     X,
     TrendingUp,
     Globe,
-    ArrowRight
+    ArrowRight,
+    Terminal,
+    FileText
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Lenis from '@studio-freight/lenis';
 import VideoCarousel from './VideoCarousel';
 import BackgroundCarousel from './BackgroundCarousel';
-import { generateImage } from './services/api';
+
 
 
 
 const AvatarLaunch = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [prompt, setPrompt] = useState("Generate a 4k photorealistic image of a futuristic avatar in a cyberpunk street...");
-    const [isGenerating, setIsGenerating] = useState(false);
-    const [generatedImage, setGeneratedImage] = useState(null);
+
+    const [openFaq, setOpenFaq] = useState(null);
     const heroRef = useRef(null);
 
-    const handleGenerate = async () => {
-        if (!prompt) return;
-        setIsGenerating(true);
-        try {
-            const base64Image = await generateImage(prompt);
-            setGeneratedImage(`data:image/png;base64,${base64Image}`);
-        } catch (error) {
-            console.error("Generation failed:", error);
-            alert(`Failed to generate image: ${error.message}`);
-        } finally {
-            setIsGenerating(false);
-        }
-    };
 
-    // ... (rest of the component)
 
-    // In the "Context/Education Section" (around line 340 in original file):
-    <div className="relative bg-slate-900 border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-2xl">
-        <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-slate-700 animate-pulse"></div>
-                <div>
-                    <div className="h-2 w-24 bg-slate-700 rounded mb-1"></div>
-                    <div className="h-2 w-16 bg-slate-800 rounded"></div>
-                </div>
-            </div>
-            <div className="px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Active Now
-            </div>
-        </div>
-        <div className="space-y-4">
-            <div className="p-4 bg-slate-800/50 rounded-lg border border-white/5">
-                <p className="text-slate-400 text-sm mb-2">Prompt Input</p>
-                <textarea
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    className="w-full bg-transparent text-white text-sm focus:outline-none resize-none h-16"
-                />
-            </div>
-            <div className="flex justify-center">
-                <button
-                    onClick={handleGenerate}
-                    disabled={isGenerating}
-                    className={`p-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white transition-all ${isGenerating ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110 active:scale-95'}`}
-                >
-                    <Zap className={`w-6 h-6 ${isGenerating ? 'animate-spin' : ''}`} fill="currentColor" />
-                </button>
-            </div>
-            <div className="h-64 bg-slate-800 rounded-lg w-full flex items-center justify-center border border-white/5 overflow-hidden relative group">
-                {generatedImage ? (
-                    <img src={generatedImage} alt="Generated Avatar" className="w-full h-full object-cover" />
-                ) : (
-                    <>
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 group-hover:opacity-100 transition-opacity"></div>
-                        <span className="text-slate-500 text-sm relative z-10">
-                            {isGenerating ? "Generating..." : "Rendering Stunning Visuals..."}
-                        </span>
-                    </>
-                )}
-            </div>
-        </div>
-    </div>
+
 
     // Initialize Lenis for smooth scrolling
     useEffect(() => {
@@ -171,53 +114,133 @@ const AvatarLaunch = () => {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-950/80 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-6'}`}
+                className="fixed top-0 left-0 right-0 z-50 flex justify-center py-4"
             >
-                <div className="container mx-auto px-6 flex justify-between items-center">
+                <motion.div
+                    initial={false}
+                    animate={isScrolled ? "scrolled" : "top"}
+                    variants={{
+                        top: {
+                            width: "100%",
+                            maxWidth: "1280px", // Standard container width
+                            paddingLeft: "1.5rem",
+                            paddingRight: "1.5rem",
+                            backgroundColor: "rgba(15, 23, 42, 0)",
+                            borderColor: "rgba(255, 255, 255, 0)",
+                            borderWidth: "1px",
+                            borderRadius: "0px",
+                            backdropFilter: "blur(0px)",
+                            y: 16
+                        },
+                        scrolled: {
+                            width: "90%",
+                            maxWidth: "800px",
+                            paddingLeft: "1.5rem",
+                            paddingRight: "1.5rem",
+                            backgroundColor: "rgba(15, 23, 42, 0.9)",
+                            borderColor: "rgba(255, 255, 255, 0.1)",
+                            borderWidth: "1px",
+                            borderRadius: "9999px",
+                            backdropFilter: "blur(12px)",
+                            y: 0
+                        }
+                    }}
+                    transition={{ type: "spring", stiffness: 120, damping: 20, mass: 1 }}
+                    className="flex justify-between items-center shadow-lg"
+                    style={{ borderStyle: 'solid' }} // Ensure border style is set for animation
+                >
                     <div className="flex items-center gap-2 cursor-pointer group">
-                        <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                            <Cpu size={18} className="text-white" />
-                        </div>
-                        <span className="text-xl font-bold tracking-tight text-white">
+                        <motion.div
+                            variants={{
+                                top: { width: 40, height: 40, borderRadius: "0.75rem", rotate: 0 },
+                                scrolled: { width: 32, height: 32, borderRadius: "50%", rotate: 0 }
+                            }}
+                            className="bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center"
+                        >
+                            <Cpu size={isScrolled ? 16 : 20} className="text-white" />
+                        </motion.div>
+                        <motion.span
+                            variants={{
+                                top: { fontSize: "1.25rem" },
+                                scrolled: { fontSize: "1.125rem" }
+                            }}
+                            className="font-bold tracking-tight text-white"
+                        >
                             Avatar<span className="text-blue-400">Launch</span>
-                        </span>
+                        </motion.span>
                     </div>
 
                     {/* Desktop Links */}
                     <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                        {['The Program', 'Features'].map((item) => (
-                            <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="hover:text-blue-400 transition-colors relative group">
-                                {item}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                        {[
+                            { name: 'Program', id: 'program' },
+                            { name: 'Features', id: 'features' },
+                            { name: 'Pricing', id: 'pricing' }
+                        ].map((item) => (
+                            <a
+                                key={item.name}
+                                href={`#${item.id}`}
+                                className="hover:text-blue-400 transition-colors relative group py-2"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                            >
+                                {item.name}
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                             </a>
                         ))}
-                        <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white text-slate-950 px-5 py-2 rounded-full font-semibold hover:bg-blue-50 transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]">
-                            Get Access
-                        </button>
                     </div>
 
-                    {/* Mobile Menu Toggle */}
-                    <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white z-50 relative">
-                        {mobileMenuOpen ? <X /> : <Menu />}
-                    </button>
-                </div>
+                    <div className="flex items-center gap-4">
+                        <motion.button
+                            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                            variants={{
+                                top: { padding: "0.625rem 1.5rem", fontSize: "1rem" },
+                                scrolled: { padding: "0.5rem 1.25rem", fontSize: "0.875rem" }
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-white text-slate-950 font-semibold hover:bg-blue-50 transition-colors rounded-full shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]"
+                        >
+                            Get Access
+                        </motion.button>
+
+                        {/* Mobile Menu Toggle */}
+                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white z-50">
+                            {mobileMenuOpen ? <X /> : <Menu />}
+                        </button>
+                    </div>
+                </motion.div>
 
                 {/* Mobile Nav Dropdown */}
                 <AnimatePresence>
                     {mobileMenuOpen && (
                         <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
+                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -20, scale: 0.95 }}
                             transition={{ duration: 0.2 }}
-                            className="md:hidden absolute top-full left-0 w-full bg-slate-900/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-4 shadow-2xl"
+                            className="md:hidden absolute top-20 left-4 right-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl origin-top"
                         >
-                            {['The Program', 'Features'].map((item) => (
-                                <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-lg text-slate-300" onClick={() => setMobileMenuOpen(false)}>
-                                    {item}
+                            {[
+                                { name: 'Program', id: 'program' },
+                                { name: 'Features', id: 'features' },
+                                { name: 'Pricing', id: 'pricing' }
+                            ].map((item) => (
+                                <a
+                                    key={item.name}
+                                    href={`#${item.id}`}
+                                    className="text-lg text-slate-300 py-2 border-b border-white/5 last:border-0"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setMobileMenuOpen(false);
+                                        document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                                    }}
+                                >
+                                    {item.name}
                                 </a>
                             ))}
-                            <button onClick={() => { setMobileMenuOpen(false); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className="w-full bg-blue-600 py-3 rounded-lg font-bold mt-2 text-white">Get Access</button>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -306,230 +329,204 @@ const AvatarLaunch = () => {
                 </motion.div>
             </section>
 
-            {/* --- Value Proposition / "How it Works" --- */}
-            <section id="features" className="py-24 bg-slate-900/50 relative">
-                <div className="container mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
-                    >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Complete Avatar Ecosystem</h2>
-                        <p className="text-slate-400">Everything you need to go from zero to monetized digital identity.</p>
-                    </motion.div>
-
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                icon: <Cpu className="text-blue-400" />,
-                                title: "Creation Suite",
-                                desc: "Master the tech stack. Learn to generate consistent faces, realistic video, and voice cloning that makes your avatar indistinguishable from reality.",
-                                color: "blue"
-                            },
-                            {
-                                icon: <Users className="text-indigo-400" />,
-                                title: "Viral Growth",
-                                desc: "Social algorithms favor the new. We teach you the content strategies specifically designed for AI influencers to hit 100k+ followers rapidly.",
-                                color: "indigo"
-                            },
-                            {
-                                icon: <TrendingUp className="text-cyan-400" />,
-                                title: "Monetization",
-                                desc: "Turn attention into income. Brand deals, digital products, and exclusive content. We provide the blueprint to 6-figure avatar businesses.",
-                                color: "cyan"
-                            }
-                        ].map((feature, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.2, duration: 0.6 }}
-                                whileHover={{ y: -10 }}
-                                className="group p-8 rounded-2xl bg-slate-950 border border-white/5 hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-900/10"
-                            >
-                                <div className={`w-12 h-12 bg-${feature.color}-900/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                                    {feature.icon}
-                                </div>
-                                <h3 className="text-xl font-bold mb-3 text-white">{feature.title}</h3>
-                                <p className="text-slate-400 leading-relaxed">
-                                    {feature.desc}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* --- Social Proof / Testimonials --- */}
-            <section className="py-24 bg-slate-950 relative overflow-hidden">
+            {/* --- Process Pipeline (Ecosystem) --- */}
+            <section id="features" className="py-24 bg-slate-900/50 relative overflow-hidden">
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-center mb-16"
+                        transition={{ duration: 0.6 }}
+                        className="text-center mb-20"
                     >
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Creator Success Stories</h2>
-                        <p className="text-slate-400 max-w-2xl mx-auto">Join the new wave of digital creators who are redefining influence.</p>
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Complete Avatar Ecosystem</h2>
+                        <p className="text-slate-400 max-w-2xl mx-auto">From DNA to Empire. A seamless pipeline for identity creation.</p>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-6">
-                        {[
-                            {
-                                quote: "Make no mistake, there is a learning curve. But the 'Consistent Character' workflow is the only thing that actually worked for me. I generated 30 clips this weekend and they finally look like the same person.",
-                                author: "Alex R.",
-                                role: "Digital Artist",
-                                stars: 5,
-                                image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
-                            },
-                            {
-                                quote: "I wasted weeks watching YouTube tutorials on lip-syncing that never looked right. Switched to the v2 workflow from Module 3 and my retention rate on TikTok went from 15% to 60% overnight.",
-                                author: "Sarah K.",
-                                role: "Content Creator",
-                                stars: 5,
-                                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
-                            },
-                            {
-                                quote: "Just closed my first UGC deal for $800. The client thinks I have a full studio setup lol. Once you get the lighting presets dialed in, this system basically prints money.",
-                                author: "Marcus T.",
-                                role: "Agency Owner",
-                                stars: 5,
-                                image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&q=80"
-                            }
-                        ].map((testimonial, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="p-8 bg-slate-900/50 border border-white/5 rounded-2xl hover:bg-slate-900 hover:border-blue-500/30 transition-all duration-300"
-                            >
-                                <div className="flex gap-1 mb-4">
-                                    {[...Array(testimonial.stars)].map((_, s) => (
-                                        <Zap key={s} size={16} className="text-yellow-500 fill-yellow-500" />
-                                    ))}
-                                </div>
-                                <p className="text-slate-300 mb-6 leading-relaxed">"{testimonial.quote}"</p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-800 border-2 border-slate-700">
-                                        <img src={testimonial.image} alt={testimonial.author} className="w-full h-full object-cover" />
+                    <div className="relative">
+                        {/* Connecting Line (Desktop) */}
+                        <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0 -translate-y-1/2"></div>
+
+                        <div className="grid md:grid-cols-3 gap-12 relative z-10">
+                            {[
+                                {
+                                    icon: <Cpu className="w-8 h-8 text-white" />,
+                                    step: "01",
+                                    title: "Avatar DNA",
+                                    desc: "Define your digital genetic code. Consistent facial geometry, voice synthesis, and distinct personality traits.",
+                                    color: "blue"
+                                },
+                                {
+                                    icon: <TrendingUp className="w-8 h-8 text-white" />,
+                                    step: "02",
+                                    title: "Viral Growth",
+                                    desc: "Deploy content that exploits algorithm biases. Automated workflows for omnipresent social reach.",
+                                    color: "indigo"
+                                },
+                                {
+                                    icon: <Globe className="w-8 h-8 text-white" />,
+                                    step: "03",
+                                    title: "Monetization",
+                                    desc: "Convert attention into capital. Brand deals, merchandise, and digital assets scaling infinitely.",
+                                    color: "cyan"
+                                }
+                            ].map((feature, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.2, duration: 0.6 }}
+                                    className="relative group"
+                                >
+                                    {/* Card */}
+                                    <div className="bg-slate-950 border border-white/10 rounded-2xl p-8 relative z-10 hover:border-blue-500/50 transition-all duration-300 h-full flex flex-col items-center text-center">
+                                        <div className={`w-16 h-16 rounded-full bg-gradient-to-br from-${feature.color}-600 to-${feature.color}-800 flex items-center justify-center mb-6 shadow-lg shadow-${feature.color}-900/20 group-hover:scale-110 transition-transform duration-300 ring-4 ring-slate-950`}>
+                                            {feature.icon}
+                                        </div>
+
+                                        <div className="absolute top-4 right-4 text-xs font-bold font-mono text-slate-700 opacity-50">
+                                            {feature.step}
+                                        </div>
+
+                                        <h3 className="text-xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors">{feature.title}</h3>
+                                        <p className="text-slate-400 text-sm leading-relaxed">
+                                            {feature.desc}
+                                        </p>
                                     </div>
-                                    <div>
-                                        <p className="font-bold text-white">{testimonial.author}</p>
-                                        <p className="text-slate-500 text-sm">{testimonial.role}</p>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* --- Context/Education Section (Reference to "Context Engineering") --- */}
-            <section id="program" className="py-24 px-6 relative overflow-hidden">
+
+
+            {/* --- Prompt System Visualizer --- */}
+            <section id="program" className="py-24 px-6 relative overflow-hidden bg-gradient-to-b from-slate-950 to-slate-900 border-y border-white/5">
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-900/50 to-transparent"></div>
+
                 <div className="container mx-auto max-w-6xl">
-                    <div className="flex flex-col md:flex-row items-center gap-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <div className="inline-flex items-center justify-center p-3 bg-blue-500/10 rounded-xl mb-6 ring-1 ring-blue-500/50 shadow-[0_0_20px_-5px_rgba(59,130,246,0.3)]">
+                            <Terminal size={24} className="text-blue-400" />
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6 font-mono tracking-tight">
+                            From Zero to Content in <span className="text-blue-500">60 Seconds</span>
+                        </h2>
+                        <p className="text-xl text-slate-400 font-light">For Any Niche, Any Avatar.</p>
+                    </motion.div>
+
+                    <div className="grid lg:grid-cols-2 gap-12 items-start">
+                        {/* Interactive Tree */}
                         <motion.div
-                            initial={{ opacity: 0, x: -50 }}
+                            initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="md:w-1/2"
+                            className="bg-slate-950 p-6 md:p-8 rounded-2xl border border-white/10 font-mono text-sm md:text-base shadow-2xl relative overflow-hidden group select-none"
                         >
-                            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                                Stop Guessing. <br />
-                                <span className="text-blue-500">Start Engineering.</span>
-                            </h2>
-                            <p className="text-slate-300 text-lg mb-8 leading-relaxed">
-                                Most people use AI like a slot machine. We teach you to use it like a precision instrument.
-                                Avatar Launch isn't just a course; it's a dynamic program that evolves with the technology.
-                            </p>
+                            <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+                                <FileText size={48} />
+                            </div>
 
-                            <ul className="space-y-4">
-                                {[
-                                    "Consistent Character Consistency (Face & Body)",
-                                    "Voice Cloning & Lip-Sync Technology",
-                                    "Automated Social Media Management",
-                                    "Brand Deal Negotiation Templates"
-                                ].map((item, index) => (
-                                    <motion.li
-                                        key={index}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: 0.2 + (index * 0.1), duration: 0.5 }}
-                                        className="flex items-center gap-3 text-slate-300"
-                                    >
-                                        <CheckCircle className="text-blue-500 w-5 h-5 flex-shrink-0" />
-                                        {item}
-                                    </motion.li>
-                                ))}
-                            </ul>
+                            <div className="space-y-6 relative z-10">
 
-                            <div className="mt-10">
-                                <button className="text-blue-400 font-semibold flex items-center gap-2 group hover:text-blue-300 transition-colors">
-                                    Explore the Curriculum <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-                                </button>
+                                {/* QUICK START */}
+                                <div>
+                                    <div className="flex items-center gap-2 text-blue-400 font-bold mb-2">
+                                        <span>┌─</span> <span className="tracking-wider">QUICK START</span>
+                                    </div>
+                                    <div className="pl-4 border-l border-white/10 space-y-2 ml-[0.35rem]">
+                                        {["Prompt 0: Avatar DNA Generator", "Prompt 1: 30-Day Calendar", "Prompt 7: Batch Workflow"].map((item, i, arr) => (
+                                            <div key={i} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors cursor-pointer group/item">
+                                                <span className="text-slate-600 group-hover/item:text-blue-500 transition-colors">{i === arr.length - 1 ? '└─' : '├─'}</span>
+                                                <span className="group-hover/item:translate-x-1 transition-transform">{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* IDEATION */}
+                                <div>
+                                    <div className="flex items-center gap-2 text-indigo-400 font-bold mb-2">
+                                        <span>├─</span> <span className="tracking-wider">IDEATION</span>
+                                    </div>
+                                    <div className="pl-4 border-l border-white/10 space-y-2 ml-[0.35rem]">
+                                        {["Prompt 2: Pain-to-Post", "Prompt 3: Competitor Intel", "Prompt 10: Viral Reverse-Engineer"].map((item, i, arr) => (
+                                            <div key={i} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors cursor-pointer group/item">
+                                                <span className="text-slate-600 group-hover/item:text-indigo-500 transition-colors">{i === arr.length - 1 ? '└─' : '├─'}</span>
+                                                <span className="group-hover/item:translate-x-1 transition-transform">{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* SCRIPTING */}
+                                <div>
+                                    <div className="flex items-center gap-2 text-purple-400 font-bold mb-2">
+                                        <span>├─</span> <span className="tracking-wider">SCRIPTING</span>
+                                    </div>
+                                    <div className="pl-4 border-l border-white/10 space-y-2 ml-[0.35rem]">
+                                        {["Reels (4A, 4B)", "Carousels (5A, 5B)", "Shorts (6A)"].map((item, i, arr) => (
+                                            <div key={i} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors cursor-pointer group/item">
+                                                <span className="text-slate-600 group-hover/item:text-purple-500 transition-colors">{i === arr.length - 1 ? '└─' : '├─'}</span>
+                                                <span className="group-hover/item:translate-x-1 transition-transform">{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* OPTIMIZATION */}
+                                <div>
+                                    <div className="flex items-center gap-2 text-cyan-400 font-bold mb-2">
+                                        <span>└─</span> <span className="tracking-wider">OPTIMIZATION</span>
+                                    </div>
+                                    <div className="pl-4 space-y-2 ml-[0.35rem]">
+                                        {["Prompt 8: Engagement Predictor", "Prompt 9: Content Autopsy"].map((item, i, arr) => (
+                                            <div key={i} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors cursor-pointer group/item">
+                                                <span className="text-slate-600 group-hover/item:text-cyan-500 transition-colors">{i === arr.length - 1 ? '└─' : '├─'}</span>
+                                                <span className="group-hover/item:translate-x-1 transition-transform">{item}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
                             </div>
                         </motion.div>
 
+                        {/* Description / Sell-in */}
                         <motion.div
-                            initial={{ opacity: 0, x: 50 }}
+                            initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="md:w-1/2 relative"
+                            className="flex flex-col justify-center h-full space-y-8"
                         >
-                            <div className="absolute inset-0 bg-blue-600 blur-[100px] opacity-20 animate-pulse"></div>
-                            <div className="relative bg-slate-900 border border-white/10 rounded-2xl p-8 backdrop-blur-xl shadow-2xl">
-                                <div className="flex items-center justify-between mb-8">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-slate-700 animate-pulse"></div>
-                                        <div>
-                                            <div className="h-2 w-24 bg-slate-700 rounded mb-1"></div>
-                                            <div className="h-2 w-16 bg-slate-800 rounded"></div>
-                                        </div>
-                                    </div>
-                                    <div className="px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full flex items-center gap-1">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Active Now
-                                    </div>
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="p-4 bg-slate-800/50 rounded-lg border border-white/5">
-                                        <p className="text-slate-400 text-sm mb-2">Prompt Input</p>
-                                        <textarea
-                                            value={prompt}
-                                            onChange={(e) => setPrompt(e.target.value)}
-                                            className="w-full bg-transparent text-white text-sm focus:outline-none resize-none h-16"
-                                        />
-                                    </div>
-                                    <div className="flex justify-center">
-                                        <button
-                                            onClick={handleGenerate}
-                                            disabled={isGenerating}
-                                            className={`p-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white transition-all ${isGenerating ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110 active:scale-95'}`}
-                                        >
-                                            <Zap className={`w-6 h-6 ${isGenerating ? 'animate-spin' : ''}`} fill="currentColor" />
-                                        </button>
-                                    </div>
-                                    <div className="h-64 bg-slate-800 rounded-lg w-full flex items-center justify-center border border-white/5 overflow-hidden relative group">
-                                        {generatedImage ? (
-                                            <img src={generatedImage} alt="Generated Avatar" className="w-full h-full object-cover" />
-                                        ) : (
-                                            <>
-                                                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 group-hover:opacity-100 transition-opacity"></div>
-                                                <span className="text-slate-500 text-sm relative z-10">
-                                                    {isGenerating ? "Generating..." : "Rendering Stunning Visuals..."}
-                                                </span>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
+                            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                                <h3 className="text-xl font-bold text-white mb-3">Systematized Creativity</h3>
+                                <p className="text-slate-400 leading-relaxed">
+                                    Stop staring at a blank page. Our engineered prompt architectures handle the structure, so you can focus on the soul of the content.
+                                </p>
                             </div>
+
+                            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                                <h3 className="text-xl font-bold text-white mb-3">30 Days of Content in 1 Hour</h3>
+                                <p className="text-slate-400 leading-relaxed">
+                                    The "Batch Workflow" node isn't just a prompt; it's a production pipeline. Generate cohesive, platform-specific scripts for an entire month in a single session.
+                                </p>
+                            </div>
+
+                            <button
+                                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 group"
+                            >
+                                Access Now <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                            </button>
                         </motion.div>
                     </div>
                 </div>
@@ -708,20 +705,20 @@ const AvatarLaunch = () => {
                     <div className="space-y-4">
                         {[
                             {
-                                q: "Do I need a powerful computer to run the AI tools?",
-                                a: "Not necessarily. While a good GPU helps, we teach cloud-based workflows (using Google Colab and cloud rendering) that allow you to create high-end results on a standard laptop."
+                                q: "Will this work for my specific niche?",
+                                a: "Yes. The 'Avatar DNA' system is designed to adapt to any industry—from fitness and finance to gaming and storytelling. You define the persona; we provide the engine."
                             },
                             {
-                                q: "I have no coding experience. Is this for me?",
-                                a: "Absolutely. 90% of our tools are no-code or low-code. For the advanced sections, we provide copy-paste templates that just work."
+                                q: "How much time do I need to invest?",
+                                a: "The initial setup takes a weekend. Once your systems are online, the 'Batch Workflow' allows you to generate a month's worth of high-quality content in just 60 minutes."
                             },
                             {
-                                q: "How long until I have my first avatar ready?",
-                                a: "Most students launch their first 'Version 1.0' avatar within 48 hours of starting the program. Refinement continues from there."
+                                q: "Can I do this without showing my real face?",
+                                a: "100%. That's the power of Digital Twins. You can create a hyper-realistic version of yourself, or build a completely synthetic character. You maintain total privacy while building a public brand."
                             },
                             {
-                                q: "Is this a subscription or one-time payment?",
-                                a: "You have two options: a monthly membership for ongoing updates and community, or a lifetime buyout. Choose what fits your budget."
+                                q: "What kind of results can I expect?",
+                                a: "Our students typically see 10x engagement growth within the first 30 days by leveraging the 'Viral Reverse-Engineer' prompts. Consistency is the key, and our AI ensures you never miss a post."
                             }
                         ].map((faq, i) => (
                             <motion.div
@@ -730,14 +727,40 @@ const AvatarLaunch = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="p-6 bg-slate-950 border border-white/5 rounded-xl hover:border-white/10 transition-colors"
+                                className={`bg-slate-950 border rounded-xl overflow-hidden transition-all duration-300 ${openFaq === i ? 'border-blue-500/50 shadow-[0_0_20px_-5px_rgba(59,130,246,0.2)]' : 'border-white/5 hover:border-white/10'}`}
                             >
-                                <h3 className="font-bold text-white mb-2 flex items-center gap-2">
-                                    <span className="text-blue-500">Q.</span> {faq.q}
-                                </h3>
-                                <p className="text-slate-400 pl-6 border-l-2 border-slate-800 ml-1">
-                                    {faq.a}
-                                </p>
+                                <button
+                                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                    className="w-full p-6 flex items-center justify-between text-left group"
+                                >
+                                    <h3 className="font-bold text-white flex items-center gap-2">
+                                        <span className="text-blue-500">Q.</span> {faq.q}
+                                    </h3>
+                                    <motion.div
+                                        animate={{ rotate: openFaq === i ? 180 : 0 }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        className={`flex-shrink-0 ml-4 ${openFaq === i ? 'text-blue-400' : 'text-slate-500'}`}
+                                    >
+                                        <ChevronDown size={20} />
+                                    </motion.div>
+                                </button>
+
+                                <AnimatePresence>
+                                    {openFaq === i && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        >
+                                            <div className="px-6 pb-6 pt-0">
+                                                <p className="text-slate-400 pl-6 border-l-2 border-slate-800 ml-1 leading-relaxed">
+                                                    {faq.a}
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </motion.div>
                         ))}
                     </div>
