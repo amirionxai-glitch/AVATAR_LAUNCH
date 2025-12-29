@@ -171,7 +171,7 @@ const AvatarLaunch = () => {
                     </div>
 
                     {/* Desktop Links */}
-                    <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                    <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
                         {[
                             { name: 'Program', id: 'program' },
                             { name: 'Features', id: 'features' },
@@ -201,13 +201,13 @@ const AvatarLaunch = () => {
                             }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="hidden md:block bg-white text-slate-950 font-semibold hover:bg-blue-50 transition-colors rounded-full shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]"
+                            className="hidden lg:block bg-white text-slate-950 font-semibold hover:bg-blue-50 transition-colors rounded-full shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)]"
                         >
                             Get Access
                         </motion.button>
 
                         {/* Mobile Menu Toggle */}
-                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white z-50 p-2">
+                        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-white z-50 p-2">
                             {mobileMenuOpen ? <X /> : <Menu />}
                         </button>
                     </div>
@@ -221,7 +221,7 @@ const AvatarLaunch = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -20, scale: 0.95 }}
                             transition={{ duration: 0.2 }}
-                            className="md:hidden absolute top-20 left-4 right-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl origin-top"
+                            className="lg:hidden absolute top-20 left-4 right-4 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl origin-top"
                         >
                             {[
                                 { name: 'Program', id: 'program' },
@@ -256,25 +256,32 @@ const AvatarLaunch = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
+                        transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 20 }}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-8"
                     >
                         <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
                         Join the AI Revolution
                     </motion.div>
 
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-                        className="text-4xl md:text-7xl font-bold tracking-tight leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400"
-                    >
-                        THE FUTURE HAS A FACE <br />
-                        <span className="text-blue-500 inline-block relative">
+                    <h1 className="text-4xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
+                        <motion.span
+                            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="block bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400"
+                        >
+                            THE FUTURE HAS A FACE
+                        </motion.span>
+                        <motion.span
+                            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-blue-500 inline-block relative mt-2"
+                        >
                             BUILT BY AI
                             <motion.svg
-                                initial={{ pathLength: 0 }}
-                                animate={{ pathLength: 1 }}
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                animate={{ pathLength: 1, opacity: 1 }}
                                 transition={{ delay: 1, duration: 1.5, ease: "easeInOut" }}
                                 className="absolute -bottom-2 left-0 w-full"
                                 viewBox="0 0 100 10"
@@ -283,13 +290,13 @@ const AvatarLaunch = () => {
                             >
                                 <path d="M0 5 Q 50 10 100 5" stroke="#3b82f6" strokeWidth="2" />
                             </motion.svg>
-                        </span>
-                    </motion.h1>
+                        </motion.span>
+                    </h1>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: 0.8 }}
+                        transition={{ delay: 0.7, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
                     >
                         The premier ecosystem for building, launching, and monetizing hyper-realistic AI influencers.
@@ -297,9 +304,9 @@ const AvatarLaunch = () => {
                     </motion.p>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.8 }}
+                        transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
                         <button
@@ -640,18 +647,17 @@ const AvatarLaunch = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 max-w-xl mx-auto shadow-2xl relative overflow-hidden group hover:border-blue-500/30 transition-colors duration-500"
+                        className="bg-slate-900/80 backdrop-blur-xl border border-blue-500/30 rounded-3xl p-8 md:p-12 max-w-xl mx-auto shadow-[0_0_40px_-10px_rgba(59,130,246,0.3)] relative overflow-hidden group hover:border-blue-400/60 hover:shadow-[0_0_60px_-10px_rgba(59,130,246,0.5)] transition-all duration-500"
                     >
                         {/* Badge */}
-                        <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-bl-xl uppercase tracking-wider shadow-lg">
-                            Exclusive
+                        <div className="absolute top-0 right-0 bg-gradient-to-bl from-blue-600 to-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-bl-xl uppercase tracking-wider shadow-lg">
+                            Exclusive Launch
                         </div>
 
                         <div className="mb-8">
                             <h3 className="text-2xl font-bold text-white mb-2">Full Access</h3>
                             <div className="flex items-baseline gap-3">
-                                <span className="text-xl text-slate-500 line-through decoration-slate-500/50">$129/month</span>
-                                <span className="text-5xl font-bold text-white">$65</span>
+                                <span className="text-5xl font-bold text-white">$129</span>
                                 <span className="text-slate-500 font-medium">/ month</span>
                             </div>
                             <p className="text-slate-400 mt-4 leading-relaxed">
@@ -662,11 +668,11 @@ const AvatarLaunch = () => {
                         <div className="mb-8">
                             <a href="https://whop.com/checkout/plan_Rg2fhMgehE8Ov" className="block w-full">
                                 <motion.button
-                                    whileHover={{ scale: 1.02 }}
+                                    whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(37, 99, 235, 0.5)" }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full py-3.5 md:py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold text-base md:text-lg transition-all shadow-lg shadow-blue-600/25"
+                                    className="w-full py-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[length:200%_100%] hover:bg-[100%_0] text-white rounded-xl font-bold text-lg transition-all duration-500 shadow-xl shadow-blue-600/20"
                                 >
-                                    Get Access Now
+                                    Get Instant Access
                                 </motion.button>
                             </a>
                         </div>

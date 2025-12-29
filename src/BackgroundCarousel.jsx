@@ -25,7 +25,7 @@ const BackgroundCarousel = () => {
                 className="w-full max-w-[1400px] flex justify-between px-4 md:px-10 h-full items-center"
             >
                 {/* Left Marquee */}
-                <div className="h-[80vh] w-[25%] overflow-hidden relative opacity-60 blur-[1px] mask-image-gradient-b">
+                <div className="h-[80vh] w-[25%] overflow-hidden relative opacity-40 blur-[1px] mask-gradient-y">
                     <motion.div
                         animate={{ y: ["0%", "-50%"] }}
                         transition={{
@@ -38,7 +38,7 @@ const BackgroundCarousel = () => {
                         {marqueeImages.map((src, index) => (
                             <div
                                 key={`left-${index}`}
-                                className="w-full aspect-[9/16] rounded-xl overflow-hidden shadow-lg"
+                                className="w-full aspect-[9/16] rounded-xl overflow-hidden shadow-lg grayscale hover:grayscale-0 transition-all duration-700"
                             >
                                 <img
                                     src={src}
@@ -51,7 +51,7 @@ const BackgroundCarousel = () => {
                 </div>
 
                 {/* Right Marquee (Reverse Scroll) */}
-                <div className="h-[80vh] w-[25%] overflow-hidden relative opacity-60 blur-[1px] mask-image-gradient-b">
+                <div className="h-[80vh] w-[25%] overflow-hidden relative opacity-40 blur-[1px] mask-gradient-y">
                     <motion.div
                         animate={{ y: ["-50%", "0%"] }}
                         transition={{
