@@ -81,7 +81,7 @@ const VideoCarousel = () => {
     }, [currentIndex]);
 
     return (
-        <div className="relative w-full max-w-5xl mx-auto h-[450px] md:h-[700px] flex items-center justify-center perspective-1000 py-10 md:py-20 pb-20 md:pb-40">
+        <div className="relative w-full max-w-5xl mx-auto h-[700px] flex items-center justify-center perspective-1000 py-20 pb-40">
             {/* Navigation Buttons */}
             <button
                 onClick={handlePrev}

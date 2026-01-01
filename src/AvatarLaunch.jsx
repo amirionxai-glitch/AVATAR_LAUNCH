@@ -206,15 +206,6 @@ const AvatarLaunch = () => {
                             Get Access
                         </motion.button>
 
-                        {/* Mobile 'Try Now' Button (Minimalist Header) */}
-                        <motion.button
-                            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                            whileTap={{ scale: 0.95 }}
-                            className="lg:hidden bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 transition-colors"
-                        >
-                            Try Now
-                        </motion.button>
-
                         {/* Mobile Menu Toggle */}
                         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-white z-50 p-2">
                             {mobileMenuOpen ? <X /> : <Menu />}
@@ -256,7 +247,7 @@ const AvatarLaunch = () => {
             </motion.nav>
 
             {/* --- Hero Section --- */}
-            <section ref={heroRef} className="relative pt-24 pb-12 md:pt-48 md:pb-60 px-6 min-h-screen flex flex-col justify-center overflow-hidden">
+            <section ref={heroRef} className="relative pt-32 pb-40 md:pt-48 md:pb-60 px-6 min-h-screen flex flex-col justify-center overflow-hidden">
                 {/* Background Carousel */}
                 <BackgroundCarousel />
 
@@ -266,13 +257,13 @@ const AvatarLaunch = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 20 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-4 md:mb-8"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-8"
                     >
                         <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
                         Join the AI Revolution
                     </motion.div>
 
-                    <h1 className="text-4xl md:text-7xl font-bold tracking-tight leading-tight mb-3 md:mb-6">
+                    <h1 className="text-4xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
                         <motion.span
                             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -306,7 +297,7 @@ const AvatarLaunch = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.7, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-6 md:mb-10 leading-relaxed"
+                        className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
                     >
                         The premier ecosystem for building, launching, and monetizing hyper-realistic AI influencers.
                         Stop watching the future happen—create it.
@@ -338,7 +329,7 @@ const AvatarLaunch = () => {
                         initial={{ opacity: 0, y: 100 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1, duration: 1, ease: "easeOut" }}
-                        className="mt-6 md:mt-16"
+                        className="mt-16"
                     >
                         <VideoCarousel />
                     </motion.div>
@@ -791,24 +782,8 @@ const AvatarLaunch = () => {
                     <a href="#" className="hover:text-blue-400 transition-colors">Support</a>
                 </div>
                 <p className="mt-4 opacity-50">Designed by AI. Built for Creators.</p>
-
             </footer>
-
-            {/* --- Thumb-zone Sticky CTA (Mobile Only) --- */}
-            <motion.div
-                initial={{ y: 100 }}
-                animate={{ y: 0 }}
-                transition={{ delay: 2, duration: 0.5 }}
-                className="fixed bottom-6 left-4 right-4 z-50 lg:hidden"
-            >
-                <button
-                    onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="w-full py-4 bg-blue-600/90 backdrop-blur-md hover:bg-blue-500 text-white rounded-2xl font-bold text-lg shadow-[0_0_20px_-5px_rgba(37,99,235,0.5)] border border-white/10 flex items-center justify-center gap-2"
-                >
-                    Get Started <ChevronRight size={20} />
-                </button>
-            </motion.div>
-        </div >
+        </div>
     );
 };
 
